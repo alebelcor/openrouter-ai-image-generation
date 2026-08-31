@@ -6,6 +6,8 @@
 - pnpm 11+
 - An OpenRouter account with access to image-generation models
 
+See the cheapest image generating models [here](https://openrouter.ai/models?output_modalities=image&order=pricing-low-to-high).
+
 ## Setup
 
 Install the dependencies:
