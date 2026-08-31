@@ -1,0 +1,95 @@
+// Based on "@tsconfig/node24"
+// https://www.npmjs.com/package/@tsconfig/node24
+{
+  "compilerOptions": {
+    // Allow JavaScript files to be imported, not just TypeScript
+    // https://www.typescriptlang.org/tsconfig/#allowJs
+    "allowJs": true,
+
+    // Enable error reporting in JavaScript files
+    // https://www.typescriptlang.org/tsconfig/#checkJs
+    "checkJs": true,
+
+    // Fix TypeScript flawed assumptions about CommonJS/AMD/UMD modules
+    // https://www.typescriptlang.org/tsconfig/#esModuleInterop
+    "esModuleInterop": true,
+
+    // Tells TypeScript to save information about the project graph from the last compilation to files stored on disk
+    // https://www.typescriptlang.org/tsconfig/#incremental
+    "incremental": true,
+
+    // Disallow writing code that can't be correctly interpreted by single-file transpilation processes
+    // https://www.typescriptlang.org/tsconfig/#isolatedModules
+    "isolatedModules": true,
+
+    // Set type definitions for built-in JS APIs
+    // https://www.typescriptlang.org/tsconfig/#lib
+    "lib": [
+      "DOM",
+      "ES2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Error",
+      "ESNext.Iterator",
+      "ESNext.Promise"
+    ],
+
+    // Set a module system for bundled code
+    // https://www.typescriptlang.org/tsconfig/#module
+    "module": "ESNext",
+
+    // Treat all non-declaration files as modules
+    // https://www.typescriptlang.org/tsconfig/#moduleDetection
+    "moduleDetection": "force",
+
+    // Set a module resolution strategy for bundled code
+    // https://www.typescriptlang.org/tsconfig/#moduleResolution
+    "moduleResolution": "Bundler",
+
+    // Use LF for end of line sequences
+    // https://www.typescriptlang.org/tsconfig/#newLine
+    "newLine": "lf",
+
+    // Do not emit compiler output files. The bundler will take care of that
+    // https://www.typescriptlang.org/tsconfig/#noEmit
+    "noEmit": true,
+
+    // Do not truncate error messages
+    // https://www.typescriptlang.org/tsconfig/#noErrorTruncation
+    "noErrorTruncation": true,
+
+    // Add `undefined` to any undeclared field in a type
+    // https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess
+    "noUncheckedIndexedAccess": true,
+
+    // Allow importing modules with a `.json` extension
+    // https://www.typescriptlang.org/tsconfig/#resolveJsonModule
+    "resolveJsonModule": true,
+
+    // Skip type checking of declaration files for dependencies
+    // https://www.typescriptlang.org/tsconfig/#skipLibCheck
+    "skipLibCheck": true,
+
+    // Enable a wide range of type checking behavior
+    // https://www.typescriptlang.org/tsconfig/#strict
+    "strict": true,
+
+    // Compilation target for TypeScript
+    // https://www.typescriptlang.org/tsconfig/#target
+    "target": "ES2024",
+
+    // Add global types
+    // https://www.typescriptlang.org/tsconfig/#types
+    "types": ["node"],
+
+    // Simplify import elision by dropping any imports with the `type` keyword
+    // https://www.typescriptlang.org/tsconfig/#verbatimModuleSyntax
+    "verbatimModuleSyntax": true
+  },
+
+  // https://www.typescriptlang.org/tsconfig/#include
+  "include": ["**/*.ts"],
+
+  // https://www.typescriptlang.org/tsconfig/#exclude
+  "exclude": ["dist", "node_modules"]
+}

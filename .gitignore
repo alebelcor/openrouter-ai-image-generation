@@ -1,0 +1,27 @@
+# Folders
+.ai-log/
+config/
+dist/
+node_modules/
+prompts/
+
+# Files
+._*
+*.gz
+*.log
+*.pem
+*.tsbuildinfo
+*.tgz
+*.zip
+.DS_Store
+.DS_Store?
+.dev.vars
+.dev.vars*
+.env
+.env.production
+.env*.local
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+TODOS.md

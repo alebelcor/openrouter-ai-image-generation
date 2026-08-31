@@ -1,0 +1,6 @@
+allowBuilds:
+  "@openrouter/sdk": true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - "@openrouter/sdk@1.2.68"
+savePrefix: ""

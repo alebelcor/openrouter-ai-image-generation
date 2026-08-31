@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    // Oxc | Oxlint and Oxfmt editor integration
+    // https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode
+    "oxc.oxc-vscode"
+  ]
+}
