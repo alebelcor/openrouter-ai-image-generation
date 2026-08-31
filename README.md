@@ -1,5 +1,7 @@
 # OpenRouter AI Image Generation
 
+> Generate AI images through OpenRouter.
+
 ## Requirements
 
 - Node.js 24+
