@@ -6,7 +6,7 @@
 - pnpm 11+
 - An OpenRouter account with access to image-generation models
 
-See the cheapest image generating models [here](https://openrouter.ai/models?output_modalities=image&order=pricing-low-to-high).
+See all OpenRouter image generating models [here](https://openrouter.ai/models?output_modalities=image).
 
 ## Setup
 
@@ -16,33 +16,84 @@ Install the dependencies:
 pnpm install
 ```
 
-Create `.env.local` (this is git-ignored) in the project root, e.g.:
+### `.env.local`
+
+Create `.env.local` in the project root.
 
 ```dotenv
-OPENROUTER_API_KEY="<enter API key here>"
+OPENROUTER_API_KEY="<OpenRouter API key>"
 OUTPUT_FOLDER="~/Downloads/ai-images"
 MODEL="krea/krea-2-medium-turbo"
 PROMPT_FILE_PATH="./prompts/krea@krea-2-medium-turbo.md"
 ```
 
-`OPENROUTER_API_KEY` is your API key. You could enter it in plain text. However, a safer approach is to use a secrets manager, e.g. Using 1Password CLI `OPENROUTER_API_KEY="op://vault/item/field"` and run `op run --env-file="./.env.local" -- pnpm dev` to generate an image.
+#### `OPENROUTER_API_KEY`
 
-`OUTPUT_FOLDER` is required and must be writable. Generated files are saved under a model-specific subdirectory, e.g. Given an `OUTPUT_FOLDER` value of `~/Downloads`, for the `krea/krea-2-medium-turbo` model, the output folder will be `~/Downloads/krea@krea-2-medium-turbo/` (the model ID's `/` is replaced with `@`).
+This is your API key. You could enter it in plain text.
 
-`MODEL` is optional. If omitted, the CLI asks you to enter an OpenRouter model ID. If provided, it must exactly match a model configuration file (more below).
+```dotenv
+OPENROUTER_API_KEY="abc123"
+```
 
-`PROMPT_FILE_PATH` is optional. If omitted, the CLI asks you to enter prompt. The prompt file path is resolved from the current working directory, e.g. `./prompts/example.md`.
+A safer approach is to use a secrets manager, like the [1Password CLI](https://www.1password.dev/cli).
 
-Ensure at least one model configuration exists under `config/` (this is git-ignored).
+```dotenv
+OPENROUTER_API_KEY="op://vault/item/field"
+```
 
-A model configuration is a `.ts` file with the OpenRouter model ID (the model ID's `/` is replaced with `@`), e.g. for the `krea/krea-2-medium-turbo` model, its configuration must be `krea@krea-2-medium-turbo.ts`.
+Then run `op run --env-file="./.env.local" -- pnpm dev` to generate an image.
 
-The model configuration file exports `rules` and `values`, e.g. for `krea/krea-2-medium-turbo` i.e. `krea@krea-2-medium-turbo.ts`:
+#### `OUTPUT_FOLDER`
+
+This is required and must be writable.
+
+Generated files are saved under a model-specific subdirectory.
+
+For example, if you're using the `krea/krea-2-medium-turbo` model and set `OUTPUT_FOLDER` like this:
+
+```dotenv
+OUTPUT_FOLDER="~/Downloads"
+```
+
+The final output folder of the generated images will be `~/Downloads/krea@krea-2-medium-turbo/`.
+
+Note: The `/` (forward slash) in the model ID's is replaced with `@`.
+
+#### `MODEL`
+
+Set `MODEL` to a model's ID to pre-select it for the generation.
+
+```dotenv
+MODEL=krea/krea-2-medium-turbo
+```
+
+If a `MODEL` is not set, the CLI will instead ask you to select a model from a list.
+
+This list is computed from the model configurations in the `config/` folder. See the "Model configuration" section below.
+
+#### `PROMPT_FILE_PATH`
+
+To feed a prompt from a text file you can set the `PROMPT_FILE_PATH`.
+
+```dotenv
+PROMPT_FILE_PATH="./prompts/example.md"
+```
+
+If a `PROMPT_FILE_PATH` is not set, the CLI will instead ask you to enter a prompt manually.
+
+### Model configuration
+
+A model configuration is a `.ts` file with the OpenRouter model ID as its name, except the `/` (forward slash) in the model ID's has to be replaced with a `@`.
+
+For example, for the `krea/krea-2-medium-turbo` model, its configuration file must be `config/krea@krea-2-medium-turbo.ts`.
+
+The configuration exports `rules` and `values`.
 
 ```typescript
 import type { Rules, Values } from "../src/config";
 
-// Source: `supported_parameters` at https://openrouter.ai/api/v1/images/models/krea/krea-2-medium-turbo/endpoints
+// Set parameter rules/validation
+// See `supported_parameters` at https://openrouter.ai/api/v1/images/models/krea/krea-2-medium-turbo/endpoints
 export const rules = {
     aspectRatio: ["1:1", "4:3", "3:2", "16:9", "4:5", "2:3", "9:16"],
     n: [1],
@@ -57,6 +108,10 @@ export const values = {
 } as const satisfies Values<typeof rules>;
 ```
 
+Ensure at least one model configuration exists under `config/`.
+
+See some model configurations [here](https://gist.github.com/alebelcor/e88de4d42a09769081476ab93b09cb11).
+
 ## Usage
 
 Generate image:
@@ -65,7 +120,7 @@ Generate image:
 pnpm dev
 ```
 
-Note: It defaults to reading environment variables from `.env.local`. Otherwise it asks you to enter a model and a prompt. The respective model configuration file is still required (see the "Setup" section above).
+Note: It defaults to reading environment variables from `.env.local`. Otherwise it asks you to enter a model and a prompt. The model configuration is required (see the "Setup" section above).
 
 Run tests:
 
