@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsx --env-file=.env.local src/index.ts",
+    "watch": "tsx src/watch.ts",
     "lint": "concurrently --kill-others-on-fail --raw 'pnpm:lint:*'",
     "lint:format": "oxfmt --check .",
     "lint:scripts": "oxlint .",

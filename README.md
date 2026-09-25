@@ -122,6 +122,14 @@ Generate image:
 pnpm dev
 ```
 
+Watch a folder for changes to prompt files and run `pnpm dev` for each change:
+
+```bash
+pnpm watch --directory ./prompts
+```
+
+It monitors `.md` files in the specified folder.
+
 Note: It defaults to reading environment variables from `.env.local`. Otherwise it asks you to enter a model and a prompt. The model configuration is required (see the "Setup" section above).
 
 Run tests:
