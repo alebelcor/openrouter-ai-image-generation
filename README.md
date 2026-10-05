@@ -120,12 +120,14 @@ Generate image:
 
 ```bash
 pnpm dev
+op run --env-file="./.env.local" -- pnpm dev # or if you're using the 1password CLI
 ```
 
 Watch a folder for changes to prompt files and run `pnpm dev` for each change:
 
 ```bash
 pnpm watch --directory ./prompts
+op run --env-file="./.env.local" -- pnpm watch --directory ./prompts # or if you're using the 1password CLI
 ```
 
 It monitors `.md` files in the specified folder.
